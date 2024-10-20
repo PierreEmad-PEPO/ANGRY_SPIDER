@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    Dictionary<ResourceItemSO, int> resources = new Dictionary<ResourceItemSO, int>();
+    Dictionary<AllResources, int> resources = new Dictionary<AllResources, int>();
+    public static InventoryManager instance;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -12,7 +19,7 @@ public class InventoryManager : MonoBehaviour
         
     }
 
-    public void AddToInventory(ResourceItemSO _item, int _amount)
+    public void AddToInventory(AllResources _item, int _amount)
     {
         if (resources.ContainsKey(_item))
         {
@@ -22,13 +29,25 @@ public class InventoryManager : MonoBehaviour
         {
             resources.Add(_item, _amount);
         }
+
+        PrintInventory();
     }
 
-    public void RemoveFromInventory(ResourceItemSO _item, int _amount) 
+    public void RemoveFromInventory(AllResources _item, int _amount) 
     {
         if (resources.ContainsKey(_item))
         {
             resources[_item] -= _amount;
+        }
+
+        PrintInventory();
+    }
+
+    public void PrintInventory()
+    {
+        foreach (var _item in resources)
+        {
+            Debug.Log(_item.Key.GetType().Name + " " + _item.Value);
         }
     }
 }
