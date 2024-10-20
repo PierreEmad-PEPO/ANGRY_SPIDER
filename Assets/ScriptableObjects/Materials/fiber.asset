@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5379768e7219993438538221d215f2e7, type: 3}
-  m_Name: fiber
+  m_Name: Fiber
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
